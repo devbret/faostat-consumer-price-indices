@@ -8,13 +8,13 @@ Explore monthly data by country and metric with this interactive data visualizat
 
 This project transforms FAOSTAT’s wide, multi-year CSV exports into a normalized long format and presents the data as a month-by-year heatmap. Allowing users to explore seasonal patterns, long-term trends and anomalies in consumer prices.
 
-The frontend emphasizes clarity and usability, combining SVG-based rendering with a thoughtful layout. The heatmap highlights gradual shifts and sudden shocks in prices. Making it well suited for exploratory analysis of inflation data across countries and time.
+The frontend emphasizes clarity and usability by combining SVG-based rendering with a useful layout. The heatmap highlights gradual shifts and sudden shocks in prices. Making it well suited for exploratory analysis of inflation data.
 
 When looked at as a unit, this project demonstrates a complete data visualization pipeline; from raw FAOSTAT data processing using Python, to an interactive D3 visualization. While serving as a reusable foundation for other large-scale, time-based economic datasets.
 
-## Set Up Instructions
+## Basic Setup Instructions
 
-Below are the required software programs and instructions for installing and using this application.
+Below are the required software programs and instructions for installing and using this application on a Linux machine.
 
 ### Programs Needed
 
@@ -22,35 +22,41 @@ Below are the required software programs and instructions for installing and usi
 
 - [Python](https://www.python.org/downloads/)
 
+- [Node.js](https://nodejs.org/en)
+
 ### Steps
 
 1. Install the above programs
 
 2. Open a terminal
 
-3. Clone this repository using `git` by running the following command: `git clone git@github.com:devbret/faostat-consumer-price-indices.git`
+3. Clone this repository: `git clone git@github.com:devbret/faostat-consumer-price-indices.git`
 
-4. Navigate to the repo's directory by running: `cd faostat-consumer-price-indices`
+4. Navigate to the repo's directory: `cd faostat-consumer-price-indices`
 
-5. Create a virtual environment with this command: `python3 -m venv venv`
+5. Create a virtual environment: `python3 -m venv venv`
 
-6. Activate your virtual environment using: `source venv/bin/activate`
+6. Activate your virtual environment: `source venv/bin/activate`
 
-7. Install the needed dependencies for running: `pip install -r requirements.txt`
+7. Install the needed dependencies: `pip install -r requirements.txt`
 
 8. Download the [Consumer Price Indices](https://www.fao.org/faostat/en/#data/CP) data from FAOSTAT
 
-9. Place the `ConsumerPricesIndices_E_All_Data.csv` file into the data directory of this repo
+9. Place the `ConsumerPricesIndices_E_All_Data.csv` file into the `data` directory of this repo
 
-10. Process the data using the Python script by running the following command: `python3 app.py`
+10. Process the data: `python3 app.py`
 
-11. Open a new terminal and navigate to the internal `frontend` directory of this repo
+11. Open a new terminal and navigate to the `frontend` directory: `cd faostat-consumer-price-indices/frontend`
 
 12. Install the frontend by running: `npm install`
 
-13. Launch the frontend by using the following command: `npm run dev`
+13. Launch the frontend: `npm run dev`
 
-14. Once the frontend has been opened first select an area, then an item and finally an element to view the heatmap
+14. Open the app in your browser: `http://localhost:5173/`
+
+15. When finished using the app: `CTRL + C`
+
+16. Exit the virtual environment: `deactivate`
 
 ## Other Considerations
 
