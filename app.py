@@ -3,7 +3,7 @@ import re
 import pandas as pd
 
 INPUT_FILE = Path("data/ConsumerPriceIndices_E_All_Data.csv")
-OUTPUT_FILE = Path("frontend/public/data/cpi_long.csv")
+OUTPUT_FILE = Path("cpi_long.csv")
 
 MONTH_MAP = {
     "january": 1, "february": 2, "march": 3, "april": 4,
@@ -66,21 +66,26 @@ def main():
     if month_col:
         out[month_col] = out[month_col].astype(str).str.strip()
         out["month_num"] = out[month_col].map(month_to_num)
+        out = out.dropna(subset=["month_num"])
+        out["month_num"] = out["month_num"].astype(int)
 
-    sort_cols = []
-    for c in ("Area", "Item", "Element"):
-        if c in out.columns:
-            sort_cols.append(c)
-    if "month_num" in out.columns:
-        sort_cols.append("month_num")
-    sort_cols.append("year")
+    out = out.dropna(subset=["value"])
+
+    keep = [
+        c
+        for c in ("Area", "Item", "Unit", "year", "month_num", "value", "flag", "note")
+        if c in out.columns
+    ]
+    out = out[keep]
+
+    sort_cols = [c for c in ("Area", "Item", "year", "month_num") if c in out.columns]
     out.sort_values(sort_cols, inplace=True, kind="mergesort")
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(OUTPUT_FILE, index=False)
 
-    print(f"✅ Wrote {len(out):,} rows")
-    print(f"➡️  Output: {OUTPUT_FILE.resolve()}")
+    print(f"Wrote {len(out):,} rows")
+    print(f"Output: {OUTPUT_FILE.resolve()}")
 
 
 if __name__ == "__main__":

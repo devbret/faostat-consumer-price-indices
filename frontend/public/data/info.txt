@@ -1,1 +1,0 @@
-Output from the Python script will be added to this directory.
