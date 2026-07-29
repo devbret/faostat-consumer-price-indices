@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="https://hosting.photobucket.com/bbcfb0d4-be20-44a0-94dc-65bff8947cf2/ff4a3384-baa9-4bc2-94c9-6bff4e3d3ea0.png"
+      type="image/x-icon"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAOSTAT Consumer Price Indices - Bret Bernhoft</title>
+    <meta
+      name="description"
+      content="Explore monthly data by country and metric with this interactive data visualization of Consumer Price Indices built using JavaScript and D3."
+    />
+    <meta name="author" content="Bret Bernhoft" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "d3": "https://cdn.jsdelivr.net/npm/d3@7/+esm"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="page-header">
+        <h1>FAOSTAT Consumer Price Indices</h1>
+      </header>
+
+      <section class="filters" aria-label="Filters and playback">
+        <label>
+          Country
+          <select id="area-select" aria-label="Country"></select>
+        </label>
+
+        <label>
+          Item
+          <select id="item-select" aria-label="Item"></select>
+        </label>
+
+        <label id="element-field" hidden>
+          Element
+          <select id="element-select" aria-label="Element"></select>
+        </label>
+
+        <div class="viz-status">
+          <h2 id="viz-title">-</h2>
+        </div>
+
+        <div class="playback" role="group" aria-label="Country playback">
+          <button id="prev-btn" type="button" aria-label="Previous country">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 2h2v12H3zM14 2 6 8l8 6z" />
+            </svg>
+          </button>
+          <button
+            id="play-btn"
+            type="button"
+            aria-label="Play through countries"
+          >
+            <svg id="play-icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M4 2l10 6-10 6z" />
+            </svg>
+            <svg id="pause-icon" viewBox="0 0 16 16" aria-hidden="true" hidden>
+              <path d="M3 2h4v12H3zM9 2h4v12H9z" />
+            </svg>
+          </button>
+          <button id="stop-btn" type="button" aria-label="Stop playback">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 3h10v10H3z" />
+            </svg>
+          </button>
+          <button id="next-btn" type="button" aria-label="Next country">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M11 2h2v12h-2zM2 2l8 6-8 6z" />
+            </svg>
+          </button>
+          <label>
+            <span class="visually-hidden">Playback speed</span>
+            <select id="speed-select" aria-label="Playback speed">
+              <option value="2000">Slow</option>
+              <option value="1200" selected>Normal</option>
+              <option value="600">Fast</option>
+              <option value="300">Fastest</option>
+            </select>
+          </label>
+          <span id="position" class="position" aria-live="off">- / -</span>
+        </div>
+      </section>
+
+      <main class="card">
+        <div id="loading" class="loading">
+          <div id="loading-text">Loading CPI data...</div>
+          <progress id="loading-bar" max="1"></progress>
+        </div>
+
+        <div id="error" class="error" hidden></div>
+
+        <div id="viz" hidden>
+          <div
+            id="chart-scroll"
+            class="chart-scroll"
+            tabindex="0"
+            role="application"
+          >
+            <svg id="chart"></svg>
+            <div id="tooltip" class="tooltip" hidden></div>
+            <div id="empty-state" class="empty-state" hidden></div>
+          </div>
+          <div id="announcer" class="visually-hidden" aria-live="polite"></div>
+        </div>
+      </main>
+
+      <footer></footer>
+    </div>
+    <script type="module" src="/assets/main.js"></script>
+  </body>
+</html>
