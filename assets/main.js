@@ -167,4 +167,21 @@ async function init() {
   update();
 }
 
-init().catch((err) => {});
+function showError(err) {
+  els.loading.hidden = true;
+  els.viz.hidden = true;
+  const title = document.createElement("strong");
+  title.textContent = "Could not load CPI data.";
+  const detail = document.createElement("div");
+  detail.textContent = err?.message ?? String(err);
+  const hint = document.createElement("div");
+  hint.textContent =
+    "If cpi_long.csv is missing or out of date, regenerate it with: python3 app.py";
+  els.error.replaceChildren(title, detail, hint);
+  els.error.hidden = false;
+}
+
+init().catch((err) => {
+  console.error(err);
+  showError(err);
+});
